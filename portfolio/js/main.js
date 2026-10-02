@@ -1,0 +1,12 @@
+const pages=[["index.html","Home"],["about.html","About"],["skills.html","Skills"],["projects.html","Projects"],["education.html","Education"],["contact.html","Contact"]];
+const cur=location.pathname.split("/").pop()||"index.html";
+document.getElementById("nav").innerHTML=`<nav class="navbar navbar-expand-lg fixed-top"><div class="container"><a class="navbar-brand" href="index.html">Priya Shihora<span>.</span></a><button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#m" aria-label="Menu"><i class="bi bi-list"></i></button><div class="collapse navbar-collapse" id="m"><ul class="navbar-nav ms-auto">${pages.map(([h,n])=>`<li class="nav-item"><a class="nav-link ${h==cur?"active":""}" href="${h}">${n}</a></li>`).join("")}</ul></div></div></nav>`;
+document.getElementById("foot").innerHTML=`<footer><div class="container d-md-flex justify-content-between align-items-center"><div><b class="text-white">Priya Shihora</b><br>Aspiring Data Analyst · Surat, India</div><div class="mt-3 mt-md-0"><a href="https://github.com/priyashihora" target="_blank" aria-label="GitHub"><i class="bi bi-github"></i></a><a href="https://www.linkedin.com/in/priyashihora" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a><a href="mailto:priyashihora012@gmail.com" aria-label="Email"><i class="bi bi-envelope"></i></a></div></div></footer>`;
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll(".rv").forEach(el=>io.observe(el));
+document.querySelectorAll("[data-count]").forEach(el=>{const t=+el.dataset.count;let n=0;const s=Math.ceil(t/50);const id=setInterval(()=>{n=Math.min(t,n+s);el.textContent=n.toLocaleString("en-IN");if(n>=t)clearInterval(id)},25)});
+const ty=document.getElementById("typed");
+if(ty){const r=["Aspiring Data Analyst","Power BI Dashboard Builder","Python & SQL Learner"];let i=0,j=0,d=false;(function tick(){const w=r[i];ty.textContent=w.slice(0,j);if(!d&&j++==w.length){d=true;return setTimeout(tick,1600)}if(d&&--j<0){d=false;j=0;i=(i+1)%r.length}setTimeout(tick,d?35:75)})()}
+const f=document.getElementById("cf");
+if(f)f.addEventListener("submit",e=>{e.preventDefault();if(!f.checkValidity()){f.classList.add("was-validated");return}
+const v=Object.fromEntries(new FormData(f));location.href=`mailto:priyashihora012@gmail.com?subject=${encodeURIComponent(v.subject)}&body=${encodeURIComponent(v.message+"\n\n— "+v.name+" ("+v.email+")")}`;});
